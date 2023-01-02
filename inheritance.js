@@ -12,7 +12,7 @@ class IntBuilder {
 	  for (let num of args) {
 		res += num;
 	  }
-	  this.integer = res + this.integer;
+	  this.integer += res;
 	  return this
 	}
 
@@ -26,7 +26,6 @@ class IntBuilder {
 	}
 
 	multiply(n)  {
-	  this.n = n;
 	  this.integer *= n;
 	  return this;
 	}
@@ -42,16 +41,12 @@ class IntBuilder {
 	}
 
 	static random(from, to) {
-	  this.from = from;
-	  this.to = to;
-	  this.random = Math.round(Math.random() * (this.to - this.from) + this.from);
-	  if (this.from > this.to) {
-		return "Error!"
-	  } else {
-		return this.random;
+		if (from > to) {
+		  return "Error!"
+		} else {
+		  return Math.round(Math.random() * (to - from) + from);
+		}
 	  }
-
-  }
   }
 
   let intBuilder = new IntBuilder(0);
@@ -115,7 +110,7 @@ class IntBuilder {
 
   StringBuilder.prototype.plus = function(...args) {
 	for (let chars of args) {
-		this.str = this.str + "" + chars;
+		this.str = this.str + chars;
 	}
 	return this;
   };
@@ -126,13 +121,12 @@ class IntBuilder {
   }
 
   StringBuilder.prototype.multiply = function(int) {
-	this.int = int;
-	this.str = this.str.repeat(this.int);
+	this.str = this.str.repeat(int);
 	return this;
   }
 
   StringBuilder.prototype.divide = function(n) {
-	k = Math.floor(this.str.length / n);
+	let k = Math.floor(this.str.length / n);
 	this.str = this.str.slice(0, k);
 	return this;
   }
@@ -195,7 +189,7 @@ class IntBuilder {
 		return this.name;
 	  }
 
-	  let strBuilder_2 = new StringBuilder_2('Privet', 'Marta'); 
+	  let strBuilder_2 = new StringBuilder_2('Privet', 'Marta');
 	  console.log(strBuilder_2
 		.plus(' all', '!')
 		.minus(4)
